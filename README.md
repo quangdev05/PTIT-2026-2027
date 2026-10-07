@@ -1,2 +1,9 @@
-# PTIT-2026-2027
-Kho lưu trữ tài liệu &amp; bài tập của sinh viên PTIT
+# PTIT DATA FOR ME
+
+Kho lưu trữ bài tập và tài liệu học tập tại PTIT.
+
+## Học kỳ 1 - 2026
+
+### IT108 - Nhập môn Công nghệ Thông tin
+
+- [Stage 5 - Session 05](./HK1/IT108/Stage5-Session04)
