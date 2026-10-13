@@ -3,6 +3,6 @@
 
 "[$(Get-Date)] --- Bat dau quet ---" | Out-File weekly_errors.txt -Append
 
-Select-String -Path app.log -Pattern "error" | Out-File weekly_errors.txt -Append
+sls -Path app.log -Pattern "error" | Out-File weekly_errors.txt -Append
 
 "[$(Get-Date)] --- Ket thuc quet ---" | Out-File weekly_errors.txt -Append

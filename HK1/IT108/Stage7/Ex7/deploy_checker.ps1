@@ -4,7 +4,7 @@
 
 "=== Bat dau quet log: $(Get-Date) ===" | Out-File daily_critical.txt
 
-$errors = @(Select-String -Path server.log -Pattern "critical")
+$errors = @(sls -Path server.log -Pattern "critical")
 
 $errors | ForEach-Object { $_.Line } | Out-File -Append daily_critical.txt
 
