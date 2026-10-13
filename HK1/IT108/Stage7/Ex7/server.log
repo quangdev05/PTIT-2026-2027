@@ -1,0 +1,5 @@
+2026-09-18 01:05:22 INFO     Service started successfully
+2026-09-18 02:30:11 CRITICAL Database connection pool exhausted
+2026-09-18 02:30:45 CRITICAL Retry limit exceeded for payment-service
+2026-09-18 03:00:00 WARNING  Disk usage at 85%
+2026-09-18 03:15:00 INFO     Health check passed
