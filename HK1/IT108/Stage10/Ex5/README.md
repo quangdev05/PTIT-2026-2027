@@ -1,3 +1,38 @@
+# BÀI 5: XÂY DỰNG BỘ TÀI LIỆU KĨ THUẬT CHO DỰ ÁN SMARTFARM
+
+## Phần 1: Phân tích
+
+### 1. Xác định Input/Ouput:
+
+- **Input:**
+  - Tín hiệu điện và thông số thô từ các cảm biến: Độ ẩm không khí, nhiệt độ, độ ẩm đất, cường độ ánh sáng, chỉ số EC/pH.
+  - Thao tác điều khiển trực tiếp từ ứng dụng của nông dân (bật/tắt bơm, cài đặt ngưỡng).
+- **Output;**
+  - Giao diện App Smart-Farm trực quan cho nông dân (màu xanh = Tốt, vàng = Cảnh báo, đỏ = Nguy hiểm).
+  - Lệnh kích hoạt thiết bị ngoại vi tự động: Rơ-le bật/tắt máy bơm phun sương, quạt thông gió, đèn quang hợp, mái che.
+  - Báo cáo lịch sử dữ liệu dạng biểu đồ và file xuất Excel/PDF.
+
+### 2. Sơ đồ phối hợp phần cứng:
+
+```
+[Cảm biến DHT22 / Ánh sáng]
+        │ (Thu thập dữ liệu thô)
+        ▼
+[SoC / Mạch điều khiển ESP32 / Raspberry Pi]
+        │ (Xử lý ban đầu & Đóng gói)
+        ▼
+[Gateway / Router Internet]
+        │ (Truyền tải dữ liệu)
+        ▼
+[Nền tảng Cloud Smart-Farm]
+        ├──► [Ứng dụng trên Smartphone] (Hiển thị & Cảnh báo cho nông dân)
+        └──► [Thiết bị điều khiển] (Tự động kích hoạt Bơm / Quạt / Đèn)
+```
+
+## Phần 2: Triển khai
+
+---
+
 # 🚀 SMART-FARM: HỆ THỐNG IOT CHO TRANG TRẠI LAN
 
 > **Smart-Farm** là giải pháp công nghệ nông nghiệp thông minh giúp người trồng Lan theo dõi môi trường tự động, cảnh báo sự cố kịp thời và tưới nước chính xác – _tiết kiệm 50% chi phí vận hành và tối ưu năng suất cây trồng_.
@@ -83,3 +118,26 @@ Dưới đây là tiến độ triển khai các tính năng cho trang trại La
 | **Tốt (An toàn)** | 22°C – 28°C          | 65% – 80%        | 🟢 **Màu Xanh**       | Duy trì chế độ theo dõi bình thường     |
 | **Cảnh báo**      | 28°C – 32°C          | 55% – 64%        | 🟡 **Màu Vàng**       | Gửi thông báo nhắc nhở nông dân         |
 | **Nguy hiểm**     | > 32°C hoặc < 18°C   | < 55% hoặc > 85% | 🔴 **Màu Đỏ**         | **Bật máy bơm / quạt tự động khẩn cấp** |
+
+---
+
+## ⚠️ PHẦN 3: KIỂM THỬ & XỬ LÝ SỰ CỐ (EDGE CASE: RAM BỊ ĐẦY)
+
+### ❓ Tình huống sự cố:
+
+Sau một thời gian vận hành liên tục, file nhật ký (Log file) lưu trữ lịch sử nhiệt độ/độ ẩm phình to khiến bộ nhớ **RAM của SoC bị đầy (Full Memory)**, dẫn đến nguy cơ đơ máy hoặc treo hệ thống.
+
+### 🛠️ Quy trình xử lý an toàn cho nông dân & kỹ sư:
+
+> 🛡️ **HƯỚNG DẪN XỬ LÝ KHI BỘ NHỚ RAM BỊ ĐẦY:**
+>
+> 1. **Khởi chạy công cụ dọn dẹp bộ nhớ:** Chạy lệnh xóa nhật ký cũ để giải phóng RAM:
+>    `smartfarm-cli clear-logs --days=7`
+> 2. **Khởi động lại ứng dụng Smart-Farm:**
+>    `smartfarm-cli restart-service`
+> 3. **Xử lý thủ công an toàn:**
+>    - Ngắt nguồn điện máy bơm trước để tránh máy bơm chạy liên tục ngoài ý muốn.
+>    - Nhấn nút Reset cứng trên mạch SoC (hoặc rút phích cắm nguồn 12V, chờ 10 giây rồi cắm lại).
+>    - Tất cả cấu hình ngưỡng tưới đã được lưu cố định trong bộ nhớ Flash nên sẽ **hoàn toàn không bị mất**.
+
+---
