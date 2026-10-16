@@ -41,3 +41,7 @@ Hãy thực hiện lần lượt các yêu cầu sau để giải thích bài h�
 - Dùng các ký hiệu biểu cảm (Icon/Emoji 🌿, 🧠, 💧, 📊) để bài học sinh động, đỡ nhàm chán.
 - Xưng hô thân thiện: **"Thầy/Cô - Bạn"** hoặc **"Gia sư AI - Bạn"**.
 ```
+
+## Phần 2: Sản phẩm
+
+- Sản phẩm có file tên là [mo_hinh_IPO_trang_trai_thong_minh.md](https://github.com/quangdev05/PTIT-2026-2027/blob/main/HK1/IT108/Stage10/Ex4/mo_hinh_IPO_trang_trai_thong_minh.md) nằm cùng thư mục.
