@@ -1,214 +1,121 @@
-# IT-101 – Tổng ôn nhanh: Excel, VLOOKUP và PowerPoint
+# STAGE 11 – TÓM TẮT ÔN TẬP
 
-> Phạm vi: 3 bài đọc trong `SS11.zip` — **Excel/Sheets: Tư duy Database & AutoFilter**, **Excel/Sheets: VLOOKUP**, **PowerPoint/Slides: Thiết kế báo cáo kỹ thuật trực quan**.
+> Phạm vi: 3 bài đọc có trong ZIP: **Excel/Sheets – Database & AutoFilter**, **Excel – VLOOKUP**, **PowerPoint/Slides – thiết kế báo cáo kỹ thuật**.
 
-## 1. Tờ phao 60 giây
+## 1. Excel/Sheets: Tư duy Database & AutoFilter
 
-| Chủ đề | Phải nhớ | Bẫy dễ mất điểm |
-|---|---|---|
-| **Database & AutoFilter** | Hàng = **Record** (một đối tượng); cột = **Field** (một thuộc tính). `Ctrl + Shift + L` bật/tắt Filter. | Dòng trống làm đứt vùng dữ liệu; tiêu đề gộp ô (`Merge Cells`) làm Filter nhận diện sai; không để dòng tổng ở giữa dữ liệu. |
-| **VLOOKUP** | `=VLOOKUP(key, table, col, FALSE)`; cột đầu của vùng tra phải chứa key; `F4` khóa vùng bằng `$`; `IFERROR` xử lý lỗi. | Quên `$` khi kéo công thức; thiếu key; key có khoảng trắng thừa; cột key không nằm bên trái; bỏ `FALSE` khiến tra cứu gần đúng. |
-| **PowerPoint** | Quy tắc **10/20/30**; tiêu đề kiểu **Assertion Title**; dùng biểu đồ dễ đọc, tương phản tốt và ít chữ. | Nhét nguyên bảng dài lên slide; biểu đồ 3D; chữ nhỏ/độ tương phản thấp; quay lưng đọc slide. |
+### Tư duy bảng dữ liệu chuẩn
+- **Row = Record (bản ghi):** một hàng là một đối tượng hoàn chỉnh, ví dụ một sinh viên hoặc một đơn hàng.
+- **Column = Field (trường):** một cột là một thuộc tính, ví dụ MSSV, họ tên, điểm.
+- **Header:** hàng tiêu đề duy nhất, mỗi cột có tên rõ ràng.
+- Dữ liệu nên ở dạng **bảng phẳng (Flat Table)**: mỗi ô chứa một giá trị; không trộn nhiều loại dữ liệu trong cùng cột.
+- **Không Merge Cells**, không chèn hàng trống giữa bảng, không đặt Total/Average ở giữa dữ liệu.
 
----
+### AutoFilter
+- Bật/tắt bộ lọc: **`Ctrl + Shift + L`** (Windows).
+- Lọc chữ: `Text Filters` → `Contains...` hoặc chọn giá trị cần xem.
+- Lọc số: `Number Filters` → `Greater Than...`, `Between...`…
+- Có thể lọc nhiều cột cùng lúc; các điều kiện được kết hợp để tìm phần giao, ví dụ `Department = Sales` **và** `Salary >= 40000`.
+- `Alt + ↓`: mở menu lọc ở ô tiêu đề đang chọn.
+- `Ctrl + A`: chọn khối dữ liệu liên tục; `Ctrl + T`: chuyển vùng dữ liệu thành Excel Table.
+- `=TRIM(A2)`: loại bỏ khoảng trắng thừa ở đầu/cuối và thu gọn khoảng trắng lặp giữa các từ trong dữ liệu văn bản.
 
-## 2. Bài 1 – Excel/Sheets: Tư duy Database & AutoFilter
+### Lỗi Filter thường gặp
+- **Lọc chỉ tới một đoạn:** thường do hàng trống hoàn toàn làm ngắt vùng dữ liệu hoặc hàng tiêu đề bị gộp ô.
+- **Không lọc đúng mã/tên:** dữ liệu có khoảng trắng thừa; thử `TRIM()` và chuẩn hóa dữ liệu.
+- Để dòng tổng ở ngoài vùng dữ liệu. Tránh dùng màu sắc thủ công thay cho lọc theo giá trị.
 
-### Khái niệm cốt lõi
-
-- **Record (bản ghi / hàng):** thông tin của **một đối tượng hoàn chỉnh**, ví dụ một sinh viên hoặc một đơn hàng.
-- **Field (trường / cột):** **một thuộc tính** của đối tượng, ví dụ MSSV, Họ tên, Điểm.
-- **Header:** hàng tiêu đề đặt tên cho các Field.
-- **AutoFilter:** lọc các bản ghi theo điều kiện, không xóa dữ liệu gốc.
-
-### Dùng AutoFilter
-
-- Chọn một ô bên trong bảng → bấm **`Ctrl + Shift + L`** hoặc vào **Data → Filter**.
-- Lọc chữ: **Text Filters** → `Contains...` hoặc chọn giá trị.
-- Lọc số: **Number Filters** → `Greater Than...`, `Between...`.
-- Có thể lọc nhiều cột cùng lúc, ví dụ `Department = Sales` **và** `Salary >= 40000`.
-
-### 5 quy tắc giữ bảng dữ liệu sạch
-
-1. **Một hàng tiêu đề rõ ràng**, không gộp ô.
-2. **Một hàng = một đối tượng**.
-3. Dữ liệu **nguyên tử**: tách Họ và Tên thành cột riêng khi cần sắp xếp/lọc.
-4. **Không chèn hàng trống** giữa vùng dữ liệu.
-5. Dòng `Total/Average` đặt **ngoài** vùng dữ liệu chính.
-
-Làm sạch khoảng trắng: `=TRIM(A2)` loại khoảng trắng đầu/cuối và khoảng trắng thừa giữa các từ (giữ một dấu cách đơn giữa các từ). Dữ liệu có khoảng trắng vô hình có thể khiến lọc/so khớp không ra kết quả mong muốn.
-
-### Phím tắt cần thuộc
-
-- `Ctrl + Shift + L`: bật/tắt AutoFilter.
-- `Alt + ↓`: mở menu dropdown Filter ở tiêu đề đang chọn.
-- `Ctrl + T`: chuyển vùng dữ liệu thành Excel Table.
-- `Ctrl + A`: chọn vùng dữ liệu liên tục hiện tại (ngữ cảnh trong bảng).
-
-### Câu hỏi tự luận hay gặp
-
-**Vì sao Filter mới lọc đến dòng 45 rồi dừng?** Hai nguyên nhân điển hình theo bài học:
-
-1. Có **một hàng trống hoàn toàn** ở dòng 46 làm Excel tưởng vùng dữ liệu đã kết thúc.
-2. **Hàng tiêu đề bị gộp ô (`Merge Cells`)** làm vùng dữ liệu bị nhận diện sai.
+### Ứng dụng
+Lọc đơn hàng chưa thanh toán, khách VIP, tồn kho thấp; bảng phẳng và sạch dễ chuyển tiếp sang PivotTable, Power BI, Python/Pandas hoặc SQL.
 
 ---
 
-## 3. Bài 2 – Excel/Sheets: VLOOKUP và nối dữ liệu
+## 2. Excel: VLOOKUP – tra cứu và nối dữ liệu
 
-### Cú pháp phải nhớ
-
+### Cú pháp cần thuộc
 ```excel
-=VLOOKUP(Lookup_value, Table_array, Col_index_num, Range_lookup)
+=VLOOKUP(Lookup_value, Table_array, Col_index_num, FALSE)
 ```
 
-| Tham số | Nghĩa | Ví dụ |
-|---|---|---|
-| `Lookup_value` | Giá trị khóa dùng để tìm | `G3` hoặc mã `SP01` |
-| `Table_array` | Vùng chứa bảng tra; **cột đầu tiên phải có khóa** | `$A:$E` hoặc `Catalog!$A:$C` |
-| `Col_index_num` | Số thứ tự cột cần trả về, tính từ **cột đầu của vùng tra** | `5` lấy cột thứ 5 |
-| `Range_lookup` | Chế độ tra cứu | `FALSE` hoặc `0` = chính xác |
+| Tham số | Ý nghĩa |
+|---|---|
+| `Lookup_value` | Giá trị/khóa cần tìm, ví dụ mã sản phẩm ở `G3`. |
+| `Table_array` | Vùng bảng tra cứu; **cột đầu tiên của vùng phải chứa khóa**. |
+| `Col_index_num` | Số thứ tự cột cần trả về, đếm từ cột đầu tiên của `Table_array` là 1. |
+| `FALSE` hoặc `0` | Tìm **chính xác**; nên dùng để tránh kết quả gần đúng ngoài ý muốn. |
 
-**Mẫu an toàn:**
-
+Ví dụ tra tên sản phẩm từ sheet `Catalog`:
 ```excel
-=VLOOKUP(G3, $A:$E, 5, FALSE)
+=VLOOKUP("SP01", Catalog!$A:$C, 2, FALSE)
 ```
 
-**Bọc lỗi nếu không tìm được mã:**
+### F4 và dấu `$`
+- Khi kéo công thức xuống nhiều dòng, vùng `Table_array` không được trôi.
+- Chọn tham chiếu vùng trong công thức rồi bấm **`F4`** để chuyển sang tham chiếu tuyệt đối, ví dụ `$A:$C` hoặc `$A$2:$C$100`.
+- Nếu quên khóa vùng, vùng tra cứu bị dịch theo từng dòng; các mã không còn nằm trong vùng và có thể trả về `#N/A`.
 
+### Điền hàng loạt và xử lý lỗi
+- Nhập công thức ở dòng đầu, sau đó kéo hoặc **nhấp đúp Fill Handle** ở góc dưới bên phải ô để tự điền xuống các dòng liền kề.
+- Dùng `IFERROR` để hiển thị thông báo dễ hiểu khi tra cứu thất bại:
 ```excel
 =IFERROR(VLOOKUP(G3, $A:$E, 5, FALSE), "Chưa có giá")
 ```
-
-### Vai trò của F4 và dấu `$`
-
-Khi kéo công thức xuống nhiều dòng, tham chiếu tương đối có thể làm vùng tra cứu dịch chuyển. Chọn vùng `Table_array` trong công thức rồi nhấn **`F4`** để chuyển thành tham chiếu tuyệt đối, ví dụ `A:E` → `$A:$E`. Như vậy vùng tra cứu được giữ nguyên khi kéo công thức.
-
-### Checklist khi gặp `#N/A`
-
-1. Mã cần tìm có thật trong bảng tra không?
-2. Mã có **khoảng trắng thừa** không? Thử làm sạch bằng `TRIM`.
-3. Cột chứa khóa có phải **cột ngoài cùng bên trái của `Table_array`** không? VLOOKUP không tra ngược từ phải sang trái.
-4. `Table_array` có bị trôi vì quên `$` không?
-5. Tham số cuối đã đặt `FALSE` hoặc `0` để tìm chính xác chưa?
-
-### Các hàm liên quan
-
-- `IFERROR(formula, fallback_value)`: thay kết quả lỗi bằng giá trị dự phòng.
-- `XLOOKUP(key, lookup_col, return_col)`: hàm hiện đại, không cần đếm số thứ tự cột và linh hoạt hơn VLOOKUP.
-- `INDEX` + `MATCH`: lựa chọn linh hoạt khi cần tra cứu từ phải sang trái.
-
-### Mối liên hệ CNTT
-
-VLOOKUP dùng mã khóa để lấy thông tin từ bảng khác, gần với ý tưởng **nối bảng (`JOIN`)** trong CSDL quan hệ/SQL. Chỉ cần hiểu đây là sự tương đồng về mục đích, không phải cú pháp giống nhau.
+- `#N/A` thường do khóa không tồn tại, khóa có khoảng trắng thừa, chọn sai vùng, hoặc dữ liệu khóa không nằm ở cột đầu tiên của vùng tra cứu.
+- VLOOKUP tra theo chiều dọc và không tra ngược từ phải sang trái. Có thể gặp `XLOOKUP` hoặc `INDEX/MATCH` ở bài toán linh hoạt hơn.
+- Về ý tưởng, VLOOKUP giúp nối thông tin giữa các bảng; đây là bước đệm để hiểu `JOIN` trong SQL.
 
 ---
 
-## 4. Bài 3 – PowerPoint/Slides: Thiết kế báo cáo trực quan
+## 3. PowerPoint/Google Slides: Thiết kế báo cáo trực quan
 
-### Quy tắc 10/20/30 của Guy Kawasaki
+### Quy tắc 10/20/30
+- **10:** tối đa khoảng 10 slide.
+- **20:** bài trình bày khoảng/dưới 20 phút.
+- **30:** cỡ chữ tối thiểu khoảng 30 pt để dễ đọc.
 
-- **10 slides tối đa**.
-- **20 phút** cho bài trình bày.
-- **30 pt tối thiểu** cho cỡ chữ theo quy tắc này.
+### Nguyên tắc thiết kế
+- **Assertion Title:** tiêu đề là câu khẳng định/kết luận, không chỉ là tên chủ đề. Ví dụ: “Tối ưu Index giúp giảm thời gian phản hồi 65%”.
+- Mỗi slide tập trung vào **một thông điệp chính**.
+- Dùng biểu đồ cột/thanh thay vì dán bảng số liệu dài; thể hiện đúng insight cần người xem nhớ.
+- Bố cục tham khảo: **tiêu đề kết luận → vùng nội dung/biểu đồ → nguồn dữ liệu**.
+- Dùng 2 màu trung tính + 1 màu nhấn; đảm bảo tương phản tốt.
+- Chừa khoảng trắng khoảng 30–40%; dùng font dễ đọc, không nhồi chữ.
 
-Hãy xem đây là nguyên tắc cô đọng thông điệp, không phải luật cứng cho mọi tình huống.
+### Tránh
+- Dán nguyên bảng Excel nhiều ô hoặc đoạn văn dài lên slide.
+- Dùng biểu đồ 3D làm méo cảm nhận về tỷ lệ.
+- Chọn màu chữ/nền tương phản kém.
+- Quay lưng đọc nguyên văn nội dung trên màn hình.
 
-### Assertion Title
-
-**Assertion Title = tiêu đề là một câu kết luận/khẳng định**, không chỉ là tên chủ đề.
-
-- Tiêu đề chủ đề: `Hiệu năng hệ thống`.
-- Tiêu đề kết luận: `Tối ưu CSDL giúp giảm 65% thời gian phản hồi`.
-
-Người xem chỉ nên cần vài giây để nắm được thông điệp chính. Slide hỗ trợ lời nói, không phải bản chép lời để người thuyết trình đọc nguyên văn. Lỗi nhồi chữ thường được gọi là **Death by PowerPoint**.
-
-### Công thức bố cục một slide dữ liệu
-
-1. **Header:** Assertion Title, nêu thông điệp.
-2. **Content:** biểu đồ/ảnh/sơ đồ làm nổi bật một insight.
-3. **Footer:** nguồn dữ liệu hoặc ghi chú cần thiết.
-
-Nguyên tắc nhanh:
-
-- Ưu tiên **biểu đồ cột/thanh** thay cho bảng số liệu quá dày.
-- Tập trung vào **một insight chính** mỗi slide.
-- Dùng khoảng **2 màu trung tính + 1 màu nhấn**.
-- Chừa khoảng trắng để bố cục dễ thở; chữ đủ lớn và tương phản tốt.
-- Tránh biểu đồ 3D gây méo cảm nhận dữ liệu, màu chữ/nền khó đọc, và đọc slide quay lưng với khán giả.
-
-### Phím tắt PowerPoint
-
-- `F5`: trình chiếu từ **slide đầu tiên**.
-- `Shift + F5`: trình chiếu từ **slide hiện tại**.
-- `B` hoặc `.`: làm đen màn hình khi đang trình chiếu.
-- `W` hoặc `,`: làm trắng màn hình khi đang trình chiếu.
-- `Ctrl + P`: bật bút để vẽ/khoanh trực tiếp trên slide khi đang trình chiếu (theo bảng phím tắt trong bài đọc).
+### Phím tắt cần nhớ
+| Phím | Tác dụng |
+|---|---|
+| `F5` | Trình chiếu từ slide đầu tiên. |
+| `Shift + F5` | Trình chiếu từ slide hiện tại. |
+| `B` hoặc `.` | Làm đen màn hình khi đang trình chiếu. |
+| `W` hoặc `,` | Làm trắng màn hình khi đang trình chiếu. |
+| `Ctrl + P` | Bật bút để chú thích trên slide khi trình chiếu. |
 
 ---
 
-## 5. Mindmap tổng hợp
+## 4. Các ý dễ bị hỏi trong bài kiểm tra
 
-```mermaid
-flowchart TD
-    A[IT-101: Tổng ôn nhanh]
-    A --> B[Excel: Database & AutoFilter]
-    A --> C[Excel: VLOOKUP]
-    A --> D[PowerPoint: Slide trực quan]
-    B --> B1[Record = hàng / đối tượng]
-    B --> B2[Field = cột / thuộc tính]
-    B --> B3[Ctrl+Shift+L: Filter]
-    B --> B4[Không Merge / không hàng trống / không tổng giữa bảng]
-    B --> B5[TRIM: làm sạch khoảng trắng]
-    C --> C1[Key: giá trị cần tìm]
-    C --> C2[Table_array: cột đầu có key]
-    C --> C3[Col_index_num: cột trả về]
-    C --> C4[FALSE/0: tìm chính xác]
-    C --> C5[F4 → $ khóa vùng tra]
-    C --> C6[IFERROR: xử lý lỗi]
-    D --> D1[Rule 10 / 20 / 30]
-    D --> D2[Assertion Title = câu kết luận]
-    D --> D3[1 slide = 1 thông điệp]
-    D --> D4[Biểu đồ rõ / chữ lớn / tương phản tốt]
-    D --> D5[F5 đầu bài / Shift+F5 hiện tại]
-```
+1. **Record vs Field:** Record là hàng/đối tượng; Field là cột/thuộc tính.
+2. **Vì sao Filter dừng giữa bảng?** Có hàng trống hoàn toàn hoặc hàng tiêu đề bị Merge Cells.
+3. **TRIM() làm gì?** Dọn khoảng trắng thừa để dữ liệu văn bản thống nhất.
+4. **VLOOKUP có 4 tham số nào?** Khóa tìm, vùng tra, chỉ số cột trả về, chế độ tìm.
+5. **Vì sao cần F4?** Khóa vùng tra bằng `$`, tránh vùng bị trôi khi kéo công thức.
+6. **Vì sao dùng FALSE?** Buộc tìm chính xác.
+7. **IFERROR dùng làm gì?** Thay lỗi bằng thông báo dễ hiểu.
+8. **Rule 10/20/30 là gì?** Tối đa 10 slide, khoảng/dưới 20 phút, chữ tối thiểu 30 pt.
+9. **Assertion Title là gì?** Tiêu đề nói kết luận/thông điệp của slide.
+10. **F5 khác Shift + F5?** Từ đầu bài so với từ slide hiện tại.
 
----
+## 5. Mẹo nhớ cực nhanh
 
-## 6. Tự kiểm tra nhanh (che đáp án trước khi làm)
+- **Database:** `1 hàng = 1 record`, `1 cột = 1 field`, không merge, không hàng trống.
+- **Filter:** `Ctrl + Shift + L`.
+- **VLOOKUP:** `Key → Table → Cột → FALSE`; nhớ `F4` khóa vùng và `IFERROR` bọc lỗi.
+- **Slide:** `10–20–30`, tiêu đề kết luận, một slide một thông điệp, biểu đồ rõ, tương phản cao.
 
-1. Record và Field khác nhau thế nào?
-2. Phím tắt bật/tắt AutoFilter là gì?
-3. Nêu hai lý do AutoFilter dừng giữa bảng.
-4. Viết công thức VLOOKUP tìm mã ở `G3`, bảng tra từ A đến E, lấy cột 5, tìm chính xác.
-5. Vì sao cần nhấn F4 cho vùng tra cứu trước khi kéo công thức?
-6. `IFERROR` dùng làm gì?
-7. Assertion Title là gì? Viết một ví dụ.
-8. Rule 10/20/30 gồm những gì?
-9. Phân biệt F5 với Shift + F5.
-10. Nêu hai lỗi thiết kế slide cần tránh.
-
-### Đáp án nhanh
-
-1. Record là một đối tượng hoàn chỉnh theo hàng; Field là một thuộc tính theo cột.
-2. `Ctrl + Shift + L`.
-3. Hàng trống ngắt vùng; tiêu đề có ô gộp (`Merge Cells`).
-4. `=VLOOKUP(G3,$A:$E,5,FALSE)`.
-5. Khóa vùng tra cứu bằng `$`, tránh vùng dịch chuyển khi kéo công thức.
-6. Thay kết quả lỗi bằng một giá trị dự phòng, ví dụ thông báo dễ hiểu.
-7. Tiêu đề nêu kết luận; ví dụ: “Tối ưu CSDL giúp giảm 65% thời gian phản hồi”.
-8. Tối đa 10 slide, 20 phút, cỡ chữ tối thiểu 30 pt.
-9. F5 bắt đầu từ đầu; Shift + F5 bắt đầu từ slide đang chọn.
-10. Nhồi chữ, biểu đồ 3D, tương phản kém, chữ quá nhỏ hoặc quay lưng đọc slide.
-
----
-
-## 7. Cách học gấp trong 15 phút
-
-- **Phút 0–4:** đọc bảng “Tờ phao 60 giây”, nhắc lại Record/Field và 5 quy tắc lọc.
-- **Phút 4–8:** tự viết cú pháp VLOOKUP từ trí nhớ; giải thích từng tham số; nói thành lời vai trò `$`, `F4`, `FALSE`, `IFERROR`.
-- **Phút 8–11:** đọc mindmap; tự kể lại Rule 10/20/30, Assertion Title và bố cục 3 vùng.
-- **Phút 11–15:** làm 10 câu tự kiểm tra mà không nhìn đáp án, sau đó chỉ ôn lại câu sai.
-
-**Mẹo:** đừng chỉ đọc đi đọc lại. Đóng tài liệu và tự trả lời bằng trí nhớ, vì nhận ra đáp án khi nhìn thấy nó không đồng nghĩa với việc tự viết được đáp án trong phòng thi.
+> Ghi chú phạm vi: trang LMS trong ZIP ghi “Buổi 11”, trong khi phần đầu của các bài đọc nhúng ghi “Session 10”. Bản ôn này tổng hợp đúng ba nội dung đọc được trong file, không tự thêm một Lesson 01 không có nguồn rõ ràng.
